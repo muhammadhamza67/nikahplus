@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'tell_us_more_screen.dart'; // Adjust path as needed
 
 class CreateAccountTypeScreen extends StatefulWidget {
   const CreateAccountTypeScreen({super.key});
@@ -22,7 +23,7 @@ class _CreateAccountScreenState extends State<CreateAccountTypeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDF9F3),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -102,7 +103,7 @@ class _CreateAccountScreenState extends State<CreateAccountTypeScreen> {
                     items: locations
                         .map((location) => DropdownMenuItem(
                               value: location,
-                              child: Text(location),
+                              child: Text(location), // ✅ COMMA FIXED HERE
                             ))
                         .toList(),
                   ),
@@ -117,10 +118,14 @@ class _CreateAccountScreenState extends State<CreateAccountTypeScreen> {
                 height: 52,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Go to next screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TellusMoreScreen()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFB9986D),
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -155,16 +160,23 @@ class _CreateAccountScreenState extends State<CreateAccountTypeScreen> {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFFF5EBE2) : Colors.white,
+          color: isSelected
+              ? Theme.of(context).colorScheme.secondary.withOpacity(0.1)
+              : Colors.white,
           border: Border.all(
-            color: isSelected ? const Color(0xFFB9986D) : Colors.grey.shade300,
+            color: isSelected
+                ? Theme.of(context).colorScheme.primary
+                : Colors.grey.shade300,
             width: 1.5,
           ),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
           children: [
-            Icon(icon, color: isSelected ? Color(0xFFB9986D) : Colors.black54),
+            Icon(icon,
+                color: isSelected
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.black54),
             const SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,8 +186,9 @@ class _CreateAccountScreenState extends State<CreateAccountTypeScreen> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
-                    color:
-                        isSelected ? const Color(0xFFB9986D) : Colors.black87,
+                    color: isSelected
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.black87,
                   ),
                 ),
                 const SizedBox(height: 4),

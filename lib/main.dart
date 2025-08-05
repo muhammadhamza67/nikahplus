@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:nikkah_screens/screens/add_birthdate_screen.dart';
 import 'package:nikkah_screens/screens/create_%20account_%20Type_screen.dart';
 import 'package:nikkah_screens/screens/create_account_screen.dart';
 import 'package:nikkah_screens/screens/nikah_plus_screen.dart';
+import 'package:nikkah_screens/screens/tell_us_more_screen.dart';
 import 'screens/splash_logo_screen.dart';
 import 'screens/choose_auth_screen.dart';
 import 'screens/login_screen.dart';
+
  // ✅ Get Started screen import
 
 void main() {
@@ -79,7 +82,10 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/creat-account': (context) => const CreateAccountScreen(),
         '/nikah-plus': (context) => const NikahPlusScreen(),
-        '/create-account-type': (context) => const CreateAccountTypeScreen()
+        '/create-account-type': (context) => const CreateAccountTypeScreen(),
+        '/tell-us-more': (context)=> const TellusMoreScreen(),
+        '/add-birthdate': (context)=> const AddBirthdateScreen()
+
       },
     );
   }
