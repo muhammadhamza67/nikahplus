@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'upload_photos_screen.dart'; // ✅ Import the upload screen
 
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({super.key});
@@ -8,13 +9,11 @@ class UserInfoScreen extends StatefulWidget {
 }
 
 class _UserInfoScreenState extends State<UserInfoScreen> {
-  // Controllers for text fields, with default text
   final TextEditingController fullName1Controller = TextEditingController(text: "Amina");
   final TextEditingController fullName2Controller = TextEditingController(text: "Muhammad");
   final TextEditingController fullName3Controller = TextEditingController(text: "Ali");
   final TextEditingController nickNameController = TextEditingController(text: "Mena");
 
-  // Gender selection: 0 = male, 1 = female, -1 = none
   int selectedGender = 1;
 
   Widget buildTextField({
@@ -31,11 +30,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         ),
         child: TextField(
           controller: controller,
-          // Removed readOnly so user can edit
           style: const TextStyle(fontWeight: FontWeight.w600),
           decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             hintText: hintText,
             border: InputBorder.none,
             suffixIcon: controller.text.isNotEmpty
@@ -47,12 +44,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                     ),
                   )
                 : null,
-            suffixIconConstraints:
-                const BoxConstraints(minWidth: 24, minHeight: 24),
+            suffixIconConstraints: const BoxConstraints(minWidth: 24, minHeight: 24),
           ),
           onChanged: (value) {
-            // To refresh suffixIcon when text changes
-            setState(() {});
+            setState(() {}); // Refresh suffixIcon
           },
         ),
       ),
@@ -92,7 +87,6 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
   @override
   void dispose() {
-    // Dispose controllers to avoid memory leaks
     fullName1Controller.dispose();
     fullName2Controller.dispose();
     fullName3Controller.dispose();
@@ -135,7 +129,6 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
               const SizedBox(height: 20),
 
-              // "Add Your Full Name*"
               const Text(
                 "Add Your Full Name*",
                 style: TextStyle(
@@ -146,23 +139,12 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
               const SizedBox(height: 10),
 
-              // Full name fields (editable)
-              buildTextField(
-                controller: fullName1Controller,
-                hintText: "Amina",
-              ),
-              buildTextField(
-                controller: fullName2Controller,
-                hintText: "Muhammad",
-              ),
-              buildTextField(
-                controller: fullName3Controller,
-                hintText: "Ali",
-              ),
+              buildTextField(controller: fullName1Controller, hintText: "Amina"),
+              buildTextField(controller: fullName2Controller, hintText: "Muhammad"),
+              buildTextField(controller: fullName3Controller, hintText: "Ali"),
 
               const SizedBox(height: 16),
 
-              // Nick Name
               const Text(
                 "Do you have any Nick Name?",
                 style: TextStyle(
@@ -173,14 +155,10 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
               const SizedBox(height: 10),
 
-              buildTextField(
-                controller: nickNameController,
-                hintText: "Mena",
-              ),
+              buildTextField(controller: nickNameController, hintText: "Mena"),
 
               const SizedBox(height: 20),
 
-              // Gender label
               const Text(
                 "What's your gender?*",
                 style: TextStyle(
@@ -191,7 +169,6 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
               const SizedBox(height: 10),
 
-              // Gender buttons (Male, Female)
               Row(
                 children: [
                   buildGenderButton("Male", 0),
@@ -202,14 +179,18 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
               const Spacer(),
 
-              // Next button
+              // ✅ Next button with navigation
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO: Your next screen navigation or logic here
-                    Navigator.pushNamed(context, '/next-screen');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const UploadPhotosScreen(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFBFA273),
