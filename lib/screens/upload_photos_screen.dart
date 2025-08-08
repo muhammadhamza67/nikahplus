@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nikkah_screens/screens/religious_background_screen.dart'; // <-- Update this to your correct path
 
 const Color goldColor = Color(0xFFFFD700);
 const Color buttonColor = Color(0xFFB9986D);
@@ -195,14 +196,22 @@ class _UploadPhotosScreenState extends State<UploadPhotosScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/completeProfile');
-                    },
+                    onPressed: _isFormValid()
+                        ? () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ReligiousBackgroundScreen(),
+                              ),
+                            );
+                          }
+                        : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           _isFormValid() ? buttonColor : Colors.grey.shade300,
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 10), // 👈 Shorter height
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40),
                       ),
