@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'marriage_family_screen.dart'; // Import your Marriage & Family screen file
 
 class EducationCareerScreen extends StatefulWidget {
   const EducationCareerScreen({super.key});
@@ -51,7 +52,7 @@ class _EducationCareerScreenState extends State<EducationCareerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFCF8F3), // Light beige background
+      backgroundColor: const Color(0xFFFCF8F3),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -82,35 +83,55 @@ class _EducationCareerScreenState extends State<EducationCareerScreen> {
               style: TextStyle(color: Color(0xFFB79D8D), fontSize: 14),
             ),
             const SizedBox(height: 20),
-            _buildDropdown('Education Level', selectedEducation, educationOptions,
-                (value) {
-              setState(() {
-                selectedEducation = value;
-              });
-            }),
+
+            _buildDropdown(
+              'Education Level',
+              selectedEducation,
+              educationOptions,
+              (value) {
+                setState(() {
+                  selectedEducation = value;
+                });
+              },
+            ),
             const SizedBox(height: 15),
-            _buildDropdown('Profession', selectedProfession, professionOptions,
-                (value) {
-              setState(() {
-                selectedProfession = value;
-              });
-            }),
+
+            _buildDropdown(
+              'Profession',
+              selectedProfession,
+              professionOptions,
+              (value) {
+                setState(() {
+                  selectedProfession = value;
+                });
+              },
+            ),
             const SizedBox(height: 15),
-            _buildDropdown('Ethnicity', selectedEthnicity, ethnicityOptions,
-                (value) {
-              setState(() {
-                selectedEthnicity = value;
-              });
-            }),
+
+            _buildDropdown(
+              'Ethnicity',
+              selectedEthnicity,
+              ethnicityOptions,
+              (value) {
+                setState(() {
+                  selectedEthnicity = value;
+                });
+              },
+            ),
             const SizedBox(height: 20),
+
             const Text(
               'Languages you know',
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 8),
-            Wrap(
-              spacing: 12,
-              runSpacing: 4,
+            GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              childAspectRatio: 5,
+              mainAxisSpacing: 4,
+              crossAxisSpacing: 8,
               children: languages.keys.map((lang) {
                 return Row(
                   mainAxisSize: MainAxisSize.min,
@@ -123,27 +144,48 @@ class _EducationCareerScreenState extends State<EducationCareerScreen> {
                         });
                       },
                       activeColor: const Color(0xFFB79D8D),
+                      materialTapTargetSize:
+                          MaterialTapTargetSize.shrinkWrap,
+                      visualDensity: VisualDensity.compact,
                     ),
-                    Text(lang),
+                    Flexible(
+                      child: Text(
+                        lang,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ],
                 );
               }).toList(),
             ),
+
             const Spacer(),
-            Container(
-              width: double.infinity,
-              height: 55,
-              decoration: BoxDecoration(
-                color: const Color(0xFFD7C7B8), // Muted beige
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: const Center(
-                child: Text(
-                  'Next',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16),
+
+            // Next button with navigation
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MarriageFamilyScreen(),
+                  ),
+                );
+              },
+              child: Container(
+                width: double.infinity,
+                height: 55,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFD7C7B8),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Next',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16),
+                  ),
                 ),
               ),
             ),
@@ -154,8 +196,12 @@ class _EducationCareerScreenState extends State<EducationCareerScreen> {
     );
   }
 
-  Widget _buildDropdown(String label, String? selectedValue,
-      List<String> options, ValueChanged<String?> onChanged) {
+  Widget _buildDropdown(
+    String label,
+    String? selectedValue,
+    List<String> options,
+    ValueChanged<String?> onChanged,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

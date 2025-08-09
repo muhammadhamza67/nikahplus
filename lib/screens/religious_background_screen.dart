@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'education_career_screen.dart'; // Make sure the path is correct
+import 'education_career_screen.dart';
 
 class ReligiousBackgroundScreen extends StatefulWidget {
   const ReligiousBackgroundScreen({super.key});
@@ -9,11 +9,13 @@ class ReligiousBackgroundScreen extends StatefulWidget {
       _ReligiousBackgroundScreenState();
 }
 
-class _ReligiousBackgroundScreenState
-    extends State<ReligiousBackgroundScreen> {
+class _ReligiousBackgroundScreenState extends State<ReligiousBackgroundScreen> {
   String religiosity = 'Very practicing';
   String prayerLevel = 'Five times daily';
   String? madhab;
+
+  bool showReligiosityOptions = false;
+  bool showPrayerOptions = false;
 
   final Color bg = const Color(0xFFFBF6F0);
   final Color borderColor = const Color(0xFFD9CBB9);
@@ -61,6 +63,87 @@ class _ReligiousBackgroundScreenState
     );
   }
 
+  Widget _label(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: 14,
+        color: primaryText,
+      ),
+    );
+  }
+
+  Widget _dropdownBox({
+    required String value,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 38,
+        decoration: BoxDecoration(
+          color: boxFill,
+          border: Border.all(color: borderColor),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                value,
+                style: TextStyle(
+                  color: primaryText,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            Container(
+              width: 28,
+              height: 24,
+              decoration: BoxDecoration(
+                color: smallTickBg,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                Icons.keyboard_arrow_down,
+                size: 16,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _optionsList({
+    required List<String> items,
+    required String selected,
+    required ValueChanged<String> onSelect,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: items
+          .where((item) => item != selected)
+          .map((item) => GestureDetector(
+                onTap: () {
+                  onSelect(item);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6),
+                  child: Text(
+                    item,
+                    style: TextStyle(fontSize: 14, color: primaryText),
+                  ),
+                ),
+              ))
+          .toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,20 +183,48 @@ class _ReligiousBackgroundScreenState
 
                 _label('How Religious Are You?*'),
                 const SizedBox(height: 6),
-                _selectedBox(religiosity),
-                const SizedBox(height: 6),
-                _optionsList(religiosityOptions, religiosity, (val) {
-                  setState(() => religiosity = val);
-                }),
+                _dropdownBox(
+                  value: religiosity,
+                  onTap: () {
+                    setState(() {
+                      showReligiosityOptions = !showReligiosityOptions;
+                    });
+                  },
+                ),
+                if (showReligiosityOptions)
+                  _optionsList(
+                    items: religiosityOptions,
+                    selected: religiosity,
+                    onSelect: (val) {
+                      setState(() {
+                        religiosity = val;
+                        showReligiosityOptions = false;
+                      });
+                    },
+                  ),
 
                 const SizedBox(height: 18),
                 _label('Prayer Level?*'),
                 const SizedBox(height: 6),
-                _selectedBox(prayerLevel),
-                const SizedBox(height: 6),
-                _optionsList(prayerOptions, prayerLevel, (val) {
-                  setState(() => prayerLevel = val);
-                }),
+                _dropdownBox(
+                  value: prayerLevel,
+                  onTap: () {
+                    setState(() {
+                      showPrayerOptions = !showPrayerOptions;
+                    });
+                  },
+                ),
+                if (showPrayerOptions)
+                  _optionsList(
+                    items: prayerOptions,
+                    selected: prayerLevel,
+                    onSelect: (val) {
+                      setState(() {
+                        prayerLevel = val;
+                        showPrayerOptions = false;
+                      });
+                    },
+                  ),
 
                 const SizedBox(height: 18),
                 _label('Madhab/School of thoughts'),
@@ -170,110 +281,12 @@ class _ReligiousBackgroundScreenState
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 12),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-
-  Widget _label(String text) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: 14,
-        color: primaryText,
-      ),
-    );
-  }
-
-  Widget _selectedBox(String text) {
-    return Container(
-      height: 38,
-      decoration: BoxDecoration(
-        color: boxFill,
-        border: Border.all(color: borderColor),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: primaryText,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Container(
-            width: 28,
-            height: 24,
-            decoration: BoxDecoration(
-              color: smallTickBg,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const Icon(
-              Icons.check,
-              size: 16,
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _optionsList(
-    List<String> items,
-    String selected,
-    void Function(String) onTap,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: items.map((item) {
-        final bool isSelected = item == selected;
-        return GestureDetector(
-          onTap: () => onTap(item),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 6),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    item,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: primaryText,
-                      height: 1.1,
-                    ),
-                  ),
-                ),
-                if (isSelected)
-                  Container(
-                    width: 22,
-                    height: 22,
-                    decoration: BoxDecoration(
-                      color: smallTickBg,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(
-                      Icons.check,
-                      size: 14,
-                      color: Colors.white,
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        );
-      }).toList(),
     );
   }
 }

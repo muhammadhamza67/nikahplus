@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
- // Adjust path as per your folder structure
-
 
 class AddBirthdateScreen extends StatefulWidget {
   const AddBirthdateScreen({super.key});
@@ -72,8 +70,10 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
               ),
             ),
             const SizedBox(height: 10),
+
+            // Pickers
             SizedBox(
-              height: 180,
+              height: 280, // Increased so more items are visible
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -85,8 +85,8 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
                       magnification: 1.2,
                       diameterRatio: 2.5,
                       squeeze: 1.2,
-                      scrollController:
-                          FixedExtentScrollController(initialItem: selectedDay - 1),
+                      scrollController: FixedExtentScrollController(
+                          initialItem: selectedDay - 1),
                       onSelectedItemChanged: (index) {
                         setState(() {
                           selectedDay = index + 1;
@@ -95,26 +95,31 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
                       selectionOverlay: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFBFA273),
                           borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                              color: const Color(0xFFBFA273), width: 2),
+                          color: Colors.transparent,
                         ),
                       ),
                       children: List.generate(
                         31,
-                        (index) => Center(
-                          child: Text(
-                            '${index + 1}',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: selectedDay == index + 1
-                                  ? Colors.white
-                                  : Colors.black,
-                              fontWeight: selectedDay == index + 1
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
+                        (index) {
+                          final isSelected = selectedDay == index + 1;
+                          return Center(
+                            child: Text(
+                              '${index + 1}',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: isSelected
+                                    ? const Color(0xFFBFA273)
+                                    : Colors.black,
+                                fontWeight: isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -137,11 +142,13 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
                       selectionOverlay: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFBFA273),
                           borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                              color: const Color(0xFFBFA273), width: 2),
+                          color: Colors.transparent,
                         ),
                       ),
-                      childCount: 10000, // big number for infinite looping
+                      childCount: 10000, // Infinite looping
                       itemBuilder: (context, index) {
                         final monthIndex = index % 12;
                         final isSelected = monthIndex == selectedMonth;
@@ -150,7 +157,9 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
                             months[monthIndex],
                             style: TextStyle(
                               fontSize: 16,
-                              color: isSelected ? Colors.white : Colors.black,
+                              color: isSelected
+                                  ? const Color(0xFFBFA273)
+                                  : Colors.black,
                               fontWeight:
                                   isSelected ? FontWeight.bold : FontWeight.normal,
                             ),
@@ -168,8 +177,8 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
                       magnification: 1.2,
                       diameterRatio: 2.5,
                       squeeze: 1.2,
-                      scrollController:
-                          FixedExtentScrollController(initialItem: selectedYear - 1991),
+                      scrollController: FixedExtentScrollController(
+                          initialItem: selectedYear - 1991),
                       onSelectedItemChanged: (index) {
                         setState(() {
                           selectedYear = years[index];
@@ -178,8 +187,10 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
                       selectionOverlay: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFBFA273),
                           borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                              color: const Color(0xFFBFA273), width: 2),
+                          color: Colors.transparent,
                         ),
                       ),
                       children: List.generate(
@@ -191,9 +202,12 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
                               '${years[index]}',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: isSelected ? Colors.white : Colors.black,
-                                fontWeight:
-                                    isSelected ? FontWeight.bold : FontWeight.normal,
+                                color: isSelected
+                                    ? const Color(0xFFBFA273)
+                                    : Colors.black,
+                                fontWeight: isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
                               ),
                             ),
                           );
@@ -207,7 +221,7 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
 
             const SizedBox(height: 12),
 
-            // Age Text with lines on sides
+            // Age Text
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -218,11 +232,11 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
                       color: const Color(0xFFBFA273),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Text(
-                      "You are 29 years old",
-                      style: TextStyle(
+                      "You are ${getAge()} years old",
+                      style: const TextStyle(
                         color: Color(0xFFBFA273),
                         fontSize: 14,
                       ),
@@ -242,7 +256,8 @@ class _AddBirthdateScreenState extends State<AddBirthdateScreen> {
 
             // Next Button
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/user-info');
