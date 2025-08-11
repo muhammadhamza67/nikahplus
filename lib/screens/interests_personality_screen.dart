@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color goldColor = Color(0xFFB9986D);
-const Color lightBgColor = Color(0xFFF5F1EB);
+const Color whiteColor = Colors.white;
 
 class InterestsPersonalityScreen extends StatefulWidget {
   const InterestsPersonalityScreen({super.key});
@@ -11,130 +11,145 @@ class InterestsPersonalityScreen extends StatefulWidget {
 }
 
 class _InterestsPersonalityScreenState extends State<InterestsPersonalityScreen> {
-  final List<String> interestsList = [
-    'Reading', 'Traveling', 'Cooking', 'Sports', 'Art', 'Music',
-    'Nature', 'Technology', 'Volunteering', 'Islamic Studies',
-    'Fitness', 'Photography', 'Writing', 'Business', 'Family Activities', 'Gym'
+  List<String> interests1 = [
+    "Reading", "Cooking", "Art", "Nature", "Volunteering",
+    "Fitness", "Writing", "Family Activities",
+    "Traveling", "Sports", "Music", "Technology",
+    "Islamic Studies", "Photography", "Business", "Gym"
   ];
 
-  final List<String> personalityList = [
-    'Kind', 'Spiritual', 'Ambitious', 'Patient', 'Creative', 'Organized',
-    'Outgoing', 'Analytical', 'Adventurous', 'Reserved', 'Humorous', 'Traditional'
+  List<String> interests2 = [
+    "Kind", "Ambitious", "Creative", "Outgoing",
+    "Adventurous", "Humorous",
+    "Spiritual", "Patient", "Organized", "Analytical",
+    "Reserved", "Traditional"
   ];
 
-  List<String> selectedInterests = [];
-  List<String> selectedPersonality = [];
-
-  void toggleSelection(List<String> selectedList, String item, int maxLimit) {
-    setState(() {
-      if (selectedList.contains(item)) {
-        selectedList.remove(item);
-      } else {
-        if (selectedList.length < maxLimit) {
-          selectedList.add(item);
-        }
-      }
-    });
-  }
-
-  Widget buildCheckboxList(List<String> items, List<String> selectedList) {
-    return Wrap(
-      spacing: 15,
-      runSpacing: 5,
-      children: items.map((item) {
-        final isSelected = selectedList.contains(item);
-        return InkWell(
-          onTap: () => toggleSelection(selectedList, item, 5),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-            decoration: BoxDecoration(
-              color: isSelected ? goldColor.withOpacity(0.3) : Colors.transparent,
-              border: Border.all(
-                color: isSelected ? goldColor : Colors.grey.shade400,
-                width: 1.2,
-              ),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Checkbox(
-                  value: isSelected,
-                  onChanged: (_) => toggleSelection(selectedList, item, 5),
-                  activeColor: goldColor,
-                ),
-                Text(
-                  item,
-                  style: const TextStyle(fontSize: 15),
-                ),
-              ],
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
+  Set<String> selected = {};
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightBgColor,
-      body: SafeArea(
+      backgroundColor: whiteColor,
+      appBar: AppBar(
+        backgroundColor: whiteColor,
+        elevation: 0,
+        title: const Text(
+          "Interests & Personality",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        iconTheme: const IconThemeData(color: Colors.black),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Interests & Personality",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const Text(
                 "Tell us about yourself to help find compatible matches.*",
-                style: TextStyle(fontSize: 14, color: Colors.black54),
+                style: TextStyle(color: goldColor, fontSize: 14),
               ),
+              const SizedBox(height: 8),
+              buildSection("Select your interests (choose up to 5)", interests1),
+              const SizedBox(height: 10),
+              buildSection("Select your interests (choose up to 5)", interests2),
               const SizedBox(height: 20),
-
-              const Text(
-                "Select your interests (choose up to 5)",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 8),
-              buildCheckboxList(interestsList, selectedInterests),
-              const SizedBox(height: 25),
-
-              const Text(
-                "Select your interests (choose up to 5)",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 8),
-              buildCheckboxList(personalityList, selectedPersonality),
-              const SizedBox(height: 40),
-
-              SizedBox(
-                width: double.infinity,
+              Center(
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Add navigation or save logic
-                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: goldColor,
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 14),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   ),
+                  onPressed: () {},
                   child: const Text(
                     "Next",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildSection(String title, List<String> items) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+        ),
+        const SizedBox(height: 6),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisExtent: 36, // reduced height for compact spacing
+            crossAxisSpacing: 6,
+            mainAxisSpacing: 0, // minimal vertical gap
+          ),
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            String interest = items[index];
+            bool isSelected = selected.contains(interest);
+
+            return InkWell(
+              onTap: () {
+                setState(() {
+                  if (isSelected) {
+                    selected.remove(interest);
+                  } else {
+                    if (selected.length < 5) {
+                      selected.add(interest);
+                    }
+                  }
+                });
+              },
+              child: Row(
+                children: [
+                  Checkbox(
+                    value: isSelected,
+                    onChanged: (value) {
+                      setState(() {
+                        if (isSelected) {
+                          selected.remove(interest);
+                        } else {
+                          if (selected.length < 5) {
+                            selected.add(interest);
+                          }
+                        }
+                      });
+                    },
+                    activeColor: goldColor,
+                    side: const BorderSide(color: goldColor, width: 1.2),
+                  ),
+                  Expanded(
+                    child: Container(
+                      color: isSelected ? goldColor : whiteColor,
+                      child: Text(
+                        interest,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }

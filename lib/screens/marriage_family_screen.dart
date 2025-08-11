@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'interests_personality_screen.dart'; // Import your Interests & Personality screen
 
 const Color goldColor = Color(0xFFB9986D);
 const Color selectedBgColor = Color(0xFFEEE5DA);
@@ -149,7 +150,14 @@ class _MarriageFamilyScreenState extends State<MarriageFamilyScreen> {
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 10),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const InterestsPersonalityScreen(),
+                    ),
+                  );
+                },
                 child: const Text(
                   "Next",
                   style: TextStyle(fontSize: 16, color: Colors.white),
