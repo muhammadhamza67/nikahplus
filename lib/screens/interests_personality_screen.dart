@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// Import your Voice & Video Introduction Screen here
+import 'voice_video_intro_screen.dart'; // <- change path according to your project
+
 const Color goldColor = Color(0xFFB9986D);
 const Color whiteColor = Colors.white;
 
@@ -56,7 +59,7 @@ class _InterestsPersonalityScreenState extends State<InterestsPersonalityScreen>
               const SizedBox(height: 8),
               buildSection("Select your interests (choose up to 5)", interests1),
               const SizedBox(height: 10),
-              buildSection("Select your interests (choose up to 5)", interests2),
+              buildSection("Select your personality traits (choose up to 5)", interests2),
               const SizedBox(height: 20),
               Center(
                 child: ElevatedButton(
@@ -65,7 +68,14 @@ class _InterestsPersonalityScreenState extends State<InterestsPersonalityScreen>
                     padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 14),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const VoiceVideoIntroScreen(),
+                      ),
+                    );
+                  },
                   child: const Text(
                     "Next",
                     style: TextStyle(color: Colors.white, fontSize: 16),
@@ -93,9 +103,9 @@ class _InterestsPersonalityScreenState extends State<InterestsPersonalityScreen>
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisExtent: 36, // reduced height for compact spacing
+            mainAxisExtent: 36,
             crossAxisSpacing: 6,
-            mainAxisSpacing: 0, // minimal vertical gap
+            mainAxisSpacing: 0,
           ),
           itemCount: items.length,
           itemBuilder: (context, index) {
