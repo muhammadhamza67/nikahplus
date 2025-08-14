@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-// Import the next screen here
-// import 'video_voice_screen.dart';  // Uncomment and adjust path
+import 'video_introduction_screen.dart';
 
 class VoiceVideoIntroScreen extends StatefulWidget {
   const VoiceVideoIntroScreen({super.key});
@@ -29,7 +27,7 @@ class _VoiceVideoIntroScreenState extends State<VoiceVideoIntroScreen> {
                   IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.black),
                     onPressed: () {
-                      Navigator.pop(context); // Go back to previous screen
+                      Navigator.pop(context);
                     },
                   ),
                   const SizedBox(width: 8),
@@ -61,8 +59,7 @@ class _VoiceVideoIntroScreenState extends State<VoiceVideoIntroScreen> {
                   color: Color(0xFFE5F8EE),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 child: Text(
                   "Optional",
                   style: TextStyle(
@@ -79,7 +76,7 @@ class _VoiceVideoIntroScreenState extends State<VoiceVideoIntroScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Color(0xFFFAF7F0),
+                  color: const Color(0xFFFAF7F0),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -111,8 +108,7 @@ class _VoiceVideoIntroScreenState extends State<VoiceVideoIntroScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 12),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                       ),
                       items: [
                         "Tell us something interesting about yourself",
@@ -169,11 +165,10 @@ class _VoiceVideoIntroScreenState extends State<VoiceVideoIntroScreen> {
                         ),
                       ),
                       onPressed: () {
-                        // Skip navigation
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const VideoVoiceScreen(),
+                            builder: (context) => const VideoIntroductionScreen(),
                           ),
                         );
                       },
@@ -191,7 +186,7 @@ class _VoiceVideoIntroScreenState extends State<VoiceVideoIntroScreen> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 50),
-                        backgroundColor: Color(0xFFD7C5B4),
+                        backgroundColor: const Color(0xFFD7C5B4),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),
                         ),
@@ -200,7 +195,7 @@ class _VoiceVideoIntroScreenState extends State<VoiceVideoIntroScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const VideoVoiceScreen(),
+                            builder: (context) => const VideoIntroductionScreen(),
                           ),
                         );
                       },
@@ -218,21 +213,6 @@ class _VoiceVideoIntroScreenState extends State<VoiceVideoIntroScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-// Dummy Next Screen
-class VideoVoiceScreen extends StatelessWidget {
-  const VideoVoiceScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Video & Voice Screen")),
-      body: const Center(
-        child: Text("This is the next screen"),
       ),
     );
   }

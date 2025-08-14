@@ -5,6 +5,7 @@ import 'package:nikkah_screens/screens/create_account_screen.dart';
 import 'package:nikkah_screens/screens/nikah_plus_screen.dart';
 import 'package:nikkah_screens/screens/tell_us_more_screen.dart';
 import 'package:nikkah_screens/screens/user_Info_screen.dart';
+import 'package:nikkah_screens/screens/voice_video_intro_screen.dart';
 import 'screens/splash_logo_screen.dart';
 import 'screens/choose_auth_screen.dart';
 import 'screens/login_screen.dart';
@@ -87,6 +88,7 @@ class MyApp extends StatelessWidget {
         '/tell-us-more': (context)=> const TellusMoreScreen(),
         '/add-birthdate': (context)=> const AddBirthdateScreen(),
          '/user-info': (context) => const UserInfoScreen(),
+         '/voice-video-intro': (context) => VoiceVideoIntroScreen()
 
       },
     );
