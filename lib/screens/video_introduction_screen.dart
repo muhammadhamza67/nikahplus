@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'bio_screen.dart'; // Import the Bio screen
 
 class VideoIntroductionScreen extends StatefulWidget {
   const VideoIntroductionScreen({super.key});
@@ -179,7 +180,14 @@ class _VideoIntroductionScreenState extends State<VideoIntroductionScreen> {
                       minimumSize: const Size(100, 48),
                     ),
                     child: const Text("Skip"),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BioScreen(),
+                        ),
+                      );
+                    },
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -189,7 +197,14 @@ class _VideoIntroductionScreenState extends State<VideoIntroductionScreen> {
                           borderRadius: BorderRadius.circular(50)),
                       minimumSize: const Size(100, 48),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BioScreen(),
+                        ),
+                      );
+                    },
                     child: const Text("Next"),
                   ),
                 ],
