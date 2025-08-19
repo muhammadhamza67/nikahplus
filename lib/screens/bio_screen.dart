@@ -5,10 +5,10 @@ class BioScreen extends StatefulWidget {
   const BioScreen({super.key});
 
   @override
-  State<BioScreen> createState() => _BioScreenState();
+  State<BioScreen> createState() => _BiorephraseScreenState();
 }
 
-class _BioScreenState extends State<BioScreen> {
+class _BiorephraseScreenState extends State<BioScreen> {
   final TextEditingController _bioController = TextEditingController();
   bool isNextEnabled = false;
 

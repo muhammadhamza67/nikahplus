@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-// Import your Voice & Video Introduction Screen here
-import 'voice_video_intro_screen.dart'; // <- change path according to your project
+import 'voice_video_intro_screen.dart'; // Import your actual VoiceVideoIntroScreen file
 
 const Color goldColor = Color(0xFFB9986D);
 const Color whiteColor = Colors.white;
@@ -10,10 +8,12 @@ class InterestsPersonalityScreen extends StatefulWidget {
   const InterestsPersonalityScreen({super.key});
 
   @override
-  State<InterestsPersonalityScreen> createState() => _InterestsPersonalityScreenState();
+  State<InterestsPersonalityScreen> createState() =>
+      _InterestsPersonalityScreenState();
 }
 
-class _InterestsPersonalityScreenState extends State<InterestsPersonalityScreen> {
+class _InterestsPersonalityScreenState
+    extends State<InterestsPersonalityScreen> {
   List<String> interests1 = [
     "Reading", "Cooking", "Art", "Nature", "Volunteering",
     "Fitness", "Writing", "Family Activities",
@@ -61,6 +61,8 @@ class _InterestsPersonalityScreenState extends State<InterestsPersonalityScreen>
               const SizedBox(height: 10),
               buildSection("Select your personality traits (choose up to 5)", interests2),
               const SizedBox(height: 20),
+
+              // Next Button → VoiceVideoIntroScreen
               Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
