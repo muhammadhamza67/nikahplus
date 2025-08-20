@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'matches_screen.dart'; // ⬅️ import your new screen file
 
 const Color goldColor = Color(0xFFB9986D);
 const Color beigeColor = Color(0xFFF5F2EE);
@@ -52,7 +53,7 @@ class DiscoverMatchesScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // No navigation
+                        // No navigation for upgrade yet
                       },
                       child: const Text("Upgrade"),
                     ),
@@ -80,15 +81,15 @@ class DiscoverMatchesScreen extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // Profile Image (centered, visible, proper size)
+                        // Profile Image
                         ClipRRect(
                           borderRadius: const BorderRadius.vertical(
                               top: Radius.circular(20)),
                           child: Image.asset(
-                            "lib/assets/images/profile.jpg", // correct path
-                            height: 250, // medium size
+                            "lib/assets/images/profile.jpg",
+                            height: 250,
                             width: double.infinity,
-                            fit: BoxFit.contain, // full picture visible
+                            fit: BoxFit.contain,
                           ),
                         ),
 
@@ -134,22 +135,33 @@ class DiscoverMatchesScreen extends StatelessWidget {
 
                         const SizedBox(height: 8),
 
-                        // Quick View button
+                        // Quick View button with Navigation
                         Align(
                           alignment: Alignment.centerRight,
-                          child: Container(
-                            margin:
-                                const EdgeInsets.only(right: 12, bottom: 12),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: goldColor,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: const Text(
-                              "Quick View",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MatchesScreen(), // ⬅️ Navigate here
+                                ),
+                              );
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                  right: 12, bottom: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: goldColor,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: const Text(
+                                "Quick View",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 12),
+                              ),
                             ),
                           ),
                         ),
@@ -183,16 +195,13 @@ class DiscoverMatchesScreen extends StatelessWidget {
                   size: 32, color: Colors.black),
             ),
             IconButton(
-                icon:
-                    const Icon(Icons.star, size: 28, color: Colors.black54),
+                icon: const Icon(Icons.star, size: 28, color: Colors.black54),
                 onPressed: () {}),
             IconButton(
-                icon:
-                    const Icon(Icons.person, size: 28, color: Colors.black54),
+                icon: const Icon(Icons.person, size: 28, color: Colors.black54),
                 onPressed: () {}),
             IconButton(
-                icon:
-                    const Icon(Icons.message, size: 28, color: Colors.black54),
+                icon: const Icon(Icons.message, size: 28, color: Colors.black54),
                 onPressed: () {}),
           ],
         ),
