@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nikkah_screens/screens/discover_%20matches_%20screen.dart';
+ // ⬅️ import your Discover Matches screen
 
 class MembershipPlansScreen extends StatelessWidget {
   const MembershipPlansScreen({super.key});
@@ -108,7 +110,7 @@ class MembershipPlansScreen extends StatelessWidget {
             _featureComparison(),
             const SizedBox(height: 30),
 
-            // Upgrade button
+            // Upgrade button 🚀 with navigation
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -118,7 +120,14 @@ class MembershipPlansScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DiscoverMatchesScreen(),
+                    ),
+                  );
+                },
                 child: const Text(
                   "Upgrade to Gold",
                   style: TextStyle(color: Colors.white, fontSize: 16),

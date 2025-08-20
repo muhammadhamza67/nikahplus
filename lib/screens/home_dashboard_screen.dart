@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nikkah_screens/screens/membership_%20plans_%20screen.dart';
+ // ✅ Import your MembershipPlansScreen
 
 const Color goldColor = Color(0xFFB9986D);
 const Color beigeColor = Color(0xFFF5F2EE);
@@ -54,7 +56,7 @@ class HomeDashboardScreen extends StatelessWidget {
                     children: [
                       _matchCard(
                         imageUrl:
-                            "https://via.placeholder.com/150", // Replace with network image
+                            "https://via.placeholder.com/150",
                         name: "Ahmed, 28",
                         profession: "Software Engineer",
                         tags: ["Practicing", "Family oriented"],
@@ -156,9 +158,16 @@ class HomeDashboardScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                // Upgrade Button
+                // ✅ Upgrade Button with Navigation
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MembershipPlansScreen(),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.teal,
                     shape: RoundedRectangleBorder(
