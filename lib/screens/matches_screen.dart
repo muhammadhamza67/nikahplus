@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'match_screen.dart'; // ✅ Import your next screen
 
 class MatchesScreen extends StatelessWidget {
   const MatchesScreen({super.key});
@@ -172,10 +173,18 @@ class MatchesScreen extends StatelessWidget {
 
                             const SizedBox(height: 12),
 
-                            // View Profile Button
+                            // ✅ View Profile Button → Navigate to MatchScreen
                             Center(
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MatchScreen(), // your next screen
+                                    ),
+                                  );
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFFB9986D),
                                   shape: RoundedRectangleBorder(
