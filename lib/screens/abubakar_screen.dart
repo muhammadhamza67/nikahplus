@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'abubakar_screen.dart';  // ✅ Import AbubakarScreen
 
-class MatchScreen extends StatelessWidget {
-  const MatchScreen({super.key});
+class AbubakarScreen extends StatelessWidget {
+  const AbubakarScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFFFAF7F2), // Cream background
       body: SafeArea(
         child: Column(
           children: [
@@ -15,7 +14,7 @@ class MatchScreen extends StatelessWidget {
 
             /// Title
             const Text(
-              "Match Screen",
+              "Discover Matches",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -60,21 +59,21 @@ class MatchScreen extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            /// Profile Card (Swipable UI Placeholder)
+            /// Profile Card
             Expanded(
               child: Center(
                 child: Transform.rotate(
-                  angle: -0.1,
+                  angle: -0.05, // slight tilt
                   child: Stack(
                     children: [
                       /// Profile Card
                       Container(
-                        width: 280,
-                        height: 400,
+                        width: 300,
+                        height: 420,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           image: const DecorationImage(
-                            image: AssetImage("lib/assets/images/profile.png"), // Replace with your asset
+                            image: AssetImage("lib/assets/images/abubakar.png"),
                             fit: BoxFit.cover,
                           ),
                           boxShadow: [
@@ -87,21 +86,19 @@ class MatchScreen extends StatelessWidget {
                         ),
                       ),
 
-                      /// Distance Badge
+                      /// Cross Button on left shoulder
                       Positioned(
-                        top: 12,
-                        left: 12,
+                        top: 50,
+                        left: 20,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 8),
-                          decoration: BoxDecoration(
-                            color: Colors.black45,
-                            borderRadius: BorderRadius.circular(8),
+                          height: 50,
+                          width: 50,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
                           ),
-                          child: const Text(
-                            "1 km",
-                            style: TextStyle(color: Colors.white, fontSize: 12),
-                          ),
+                          child: const Icon(Icons.close,
+                              color: Colors.teal, size: 28),
                         ),
                       ),
 
@@ -133,62 +130,34 @@ class MatchScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Mohammad Ali, 33",
+                                    "Abdul Bakr, 29",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    "Chartered Accountant",
+                                    "Civil Engineer",
                                     style: TextStyle(
                                         color: Colors.white70, fontSize: 14),
                                   ),
                                 ],
                               ),
-
-                              /// ✅ Quick View Button with Navigation
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const AbubakarScreen()), // ✅ Go to AbubakarScreen
-                                  );
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 6, horizontal: 12),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: const Text(
-                                    "Quick View",
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 12),
-                                  ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 6, horizontal: 12),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                              ),
+                                child: const Text(
+                                  "Quick View",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 12),
+                                ),
+                              )
                             ],
                           ),
-                        ),
-                      ),
-
-                      /// Like Button Overlay
-                      Positioned(
-                        top: 50,
-                        right: 100,
-                        child: Container(
-                          height: 60,
-                          width: 60,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(Icons.favorite,
-                              color: Colors.red, size: 32),
                         ),
                       ),
                     ],
@@ -197,28 +166,23 @@ class MatchScreen extends StatelessWidget {
               ),
             ),
 
-            /// Bottom Navigation
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+            /// Bottom Navigation Bar
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              decoration: const BoxDecoration(
+                color: Color(0xFFD9C7B5), // beige shade
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.grey[200],
-                    radius: 28,
-                    child: const Icon(Icons.close, color: Colors.teal, size: 28),
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.teal,
-                    radius: 32,
-                    child: const Icon(Icons.favorite,
-                        color: Colors.white, size: 32),
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.grey[200],
-                    radius: 28,
-                    child: const Icon(Icons.star, color: Colors.teal, size: 28),
-                  ),
+                children: const [
+                  Icon(Icons.close, size: 30, color: Colors.teal),
+                  Icon(Icons.favorite, size: 30, color: Colors.brown),
+                  Icon(Icons.star, size: 30, color: Colors.brown),
+                  Icon(Icons.people, size: 30, color: Colors.brown),
                 ],
               ),
             )
