@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nikkah_screens/screens/family_panel_screen.dart';
+// ⬅️ Import the Family Panel screen
 
 class ItsMatchScreen extends StatelessWidget {
   const ItsMatchScreen({super.key});
@@ -156,7 +158,15 @@ class ItsMatchScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    // ⬅️ Navigate to Family Panel Screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FamilyPanelScreen(),
+                      ),
+                    );
+                  },
                   child: const Text(
                     "Say Salaam",
                     style: TextStyle(fontSize: 16),
@@ -175,7 +185,10 @@ class ItsMatchScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    // Keep swiping → go back
+                    Navigator.pop(context);
+                  },
                   child: const Text(
                     "Keep swiping",
                     style: TextStyle(fontSize: 16),
