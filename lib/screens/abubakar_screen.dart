@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'its_match_screen.dart'; // make sure you import the match screen
 
 class AbubakarScreen extends StatelessWidget {
   const AbubakarScreen({super.key});
@@ -178,11 +179,25 @@ class AbubakarScreen extends StatelessWidget {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Icon(Icons.close, size: 30, color: Colors.teal),
-                  Icon(Icons.favorite, size: 30, color: Colors.brown),
-                  Icon(Icons.star, size: 30, color: Colors.brown),
-                  Icon(Icons.people, size: 30, color: Colors.brown),
+                children: [
+                  const Icon(Icons.close, size: 30, color: Colors.teal),
+
+                  // ❤️ Favorite icon → Navigate to ItsMatchScreen
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ItsMatchScreen(),
+                        ),
+                      );
+                    },
+                    child: const Icon(Icons.favorite,
+                        size: 30, color: Colors.brown),
+                  ),
+
+                  const Icon(Icons.star, size: 30, color: Colors.brown),
+                  const Icon(Icons.people, size: 30, color: Colors.brown),
                 ],
               ),
             )
