@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'linked_profiles_screen.dart';
 
 class FamilyPanelSharedScreen extends StatefulWidget {
   const FamilyPanelSharedScreen({super.key});
 
   @override
-  State<FamilyPanelSharedScreen> createState() => _FamilyPanelSharedScreenState();
+  State<FamilyPanelSharedScreen> createState() =>
+      _FamilyPanelSharedScreenState();
 }
 
 class _FamilyPanelSharedScreenState extends State<FamilyPanelSharedScreen>
@@ -14,7 +16,7 @@ class _FamilyPanelSharedScreenState extends State<FamilyPanelSharedScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 1, vsync: this);
   }
 
   @override
@@ -33,9 +35,23 @@ class _FamilyPanelSharedScreenState extends State<FamilyPanelSharedScreen>
           indicatorColor: Colors.brown,
           tabs: const [
             Tab(text: "Shared Conversations"),
-            Tab(text: "Linked Profiles"),
           ],
         ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const LinkedProfilesScreen()),
+              );
+            },
+            child: const Text(
+              "Linked Profiles",
+              style: TextStyle(color: Colors.teal, fontWeight: FontWeight.w500),
+            ),
+          ),
+        ],
       ),
       body: TabBarView(
         controller: _tabController,
@@ -52,7 +68,8 @@ class _FamilyPanelSharedScreenState extends State<FamilyPanelSharedScreen>
                   children: [
                     const Text(
                       "Conversations Shared with Family",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     TextButton(
                       onPressed: () {},
@@ -127,14 +144,6 @@ class _FamilyPanelSharedScreenState extends State<FamilyPanelSharedScreen>
               ],
             ),
           ),
-
-          // ---------------- Linked Profiles ----------------
-          const Center(
-            child: Text(
-              "Linked Profiles will appear here",
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-          )
         ],
       ),
 
@@ -149,7 +158,8 @@ class _FamilyPanelSharedScreenState extends State<FamilyPanelSharedScreen>
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: "Discover"),
           BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Messages"),
-          BottomNavigationBarItem(icon: Icon(Icons.family_restroom), label: "Family"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.family_restroom), label: "Family"),
         ],
       ),
     );
@@ -178,11 +188,13 @@ class _FamilyPanelSharedScreenState extends State<FamilyPanelSharedScreen>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text(time, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+              Text(time,
+                  style: const TextStyle(color: Colors.grey, fontSize: 12)),
             ],
           ),
           const SizedBox(height: 4),
-          Text(relation, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+          Text(relation,
+              style: const TextStyle(fontSize: 12, color: Colors.grey)),
           const SizedBox(height: 6),
           Text(message, style: const TextStyle(color: Colors.black87)),
         ],
