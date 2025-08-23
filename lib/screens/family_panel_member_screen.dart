@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'family_panel_shared_screen.dart'; // import new screen
 
 class FamilyPanelMemberScreen extends StatelessWidget {
   const FamilyPanelMemberScreen({super.key});
@@ -43,8 +44,8 @@ class FamilyPanelMemberScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Text("Family Involvement",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold)),
                   SizedBox(height: 6),
                   Text(
                     "Invite family members to guide your marriage journey",
@@ -122,12 +123,14 @@ class FamilyPanelMemberScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNav(),
+
+      // ✅ Updated Bottom Nav with navigation
+      bottomNavigationBar: _buildBottomNav(context),
     );
   }
 
-  // Bottom nav bar
-  static Widget _buildBottomNav() {
+  // Bottom nav bar with navigation
+  static Widget _buildBottomNav(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: const BoxDecoration(
@@ -138,12 +141,25 @@ class FamilyPanelMemberScreen extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: const [
-          Icon(Icons.home_outlined, color: Colors.grey),
-          Icon(Icons.search_outlined, color: Colors.grey),
-          Icon(Icons.favorite_border, color: Colors.grey),
-          Icon(Icons.group_outlined, color: Color(0xFFB9986D)), // active tab
-          Icon(Icons.person_outline, color: Colors.grey),
+        children: [
+          const Icon(Icons.home_outlined, color: Colors.grey),
+          const Icon(Icons.search_outlined, color: Colors.grey),
+          const Icon(Icons.favorite_border, color: Colors.grey),
+
+          // ✅ Group Icon navigates to FamilyPanelSharedScreen
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const FamilyPanelSharedScreen(),
+                ),
+              );
+            },
+            child: const Icon(Icons.group_outlined, color: Color(0xFFB9986D)),
+          ),
+
+          const Icon(Icons.person_outline, color: Colors.grey),
         ],
       ),
     );
