@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'nikah_navigator_screen.dart'; // Import your second screen
+
 class LinkedProfilesScreen extends StatelessWidget {
   const LinkedProfilesScreen({super.key});
 
@@ -18,7 +20,7 @@ class LinkedProfilesScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Family Panel',
                       style: TextStyle(
                         fontSize: 20,
@@ -26,7 +28,7 @@ class LinkedProfilesScreen extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Linked Profiles',
                       style: TextStyle(
                         fontSize: 16,
@@ -50,18 +52,19 @@ class LinkedProfilesScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.people, color: Colors.teal),
+                          const Icon(Icons.people, color: Colors.teal),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               'Linked Profiles\nManage profiles you\'ve created for your family members',
-                              style: TextStyle(color: Colors.black87, fontSize: 14),
+                              style: const TextStyle(
+                                  color: Colors.black87, fontSize: 14),
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 12),
-                      Text(
+                      const Text(
                         'As a guardian or parent, you can create and manage profiles for your children, helping them find suitable matches while respecting their preferences.',
                         style: TextStyle(color: Colors.black54, fontSize: 13),
                       ),
@@ -74,12 +77,13 @@ class LinkedProfilesScreen extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.info, color: Colors.teal),
+                            const Icon(Icons.info, color: Colors.teal),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 'You can link your account with your children\'s profiles to help them in their marriage search journey.',
-                                style: TextStyle(color: Colors.teal.shade900, fontSize: 13),
+                                style: TextStyle(
+                                    color: Colors.teal.shade900, fontSize: 13),
                               ),
                             )
                           ],
@@ -90,7 +94,7 @@ class LinkedProfilesScreen extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 20),
-                Text('Your Linked Profiles',
+                const Text('Your Linked Profiles',
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
@@ -120,7 +124,7 @@ class LinkedProfilesScreen extends StatelessWidget {
                 const SizedBox(height: 24),
 
                 // Privacy Settings
-                Text('Profile Management',
+                const Text('Profile Management',
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
@@ -136,7 +140,7 @@ class LinkedProfilesScreen extends StatelessWidget {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+                        children: const [
                           Text(
                             'Default Privacy Settings',
                             style: TextStyle(
@@ -155,6 +159,34 @@ class LinkedProfilesScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+
+                const SizedBox(height: 24),
+
+                // 🚀 Navigation Button
+                Center(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 12),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NikahNavigatorScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Go to Nikah Navigator",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -163,7 +195,7 @@ class LinkedProfilesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileCard({
+  static Widget _buildProfileCard({
     required String name,
     required String detail,
     required String activity,
@@ -190,21 +222,21 @@ class LinkedProfilesScreen extends StatelessWidget {
                 children: [
                   Text(name,
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                          const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   Text(detail,
-                      style: TextStyle(color: Colors.black54, fontSize: 13)),
+                      style: const TextStyle(color: Colors.black54, fontSize: 13)),
                 ],
               ),
-              Text('Active',
+              const Text('Active',
                   style: TextStyle(color: Colors.green, fontSize: 13)),
             ],
           ),
           const SizedBox(height: 12),
-          Text('Recent Activity',
+          const Text('Recent Activity',
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
           const SizedBox(height: 8),
           Text(activity,
-              style: TextStyle(color: Colors.black54, fontSize: 13)),
+              style: const TextStyle(color: Colors.black54, fontSize: 13)),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -212,22 +244,20 @@ class LinkedProfilesScreen extends StatelessWidget {
               Column(
                 children: [
                   Text(score,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  Text('Marriage Readiness',
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('Marriage Readiness',
                       style: TextStyle(color: Colors.black54, fontSize: 12)),
                 ],
               ),
               Column(
                 children: [
                   Text(matches,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  Text('Active Matches',
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('Active Matches',
                       style: TextStyle(color: Colors.black54, fontSize: 12)),
                 ],
               ),
-              Text(
+              const Text(
                 'View All',
                 style: TextStyle(color: Colors.teal, fontWeight: FontWeight.w600),
               )
@@ -238,13 +268,13 @@ class LinkedProfilesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSwitchRow(String title, bool value) {
+  static Widget _buildSwitchRow(String title, bool value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: TextStyle(fontSize: 13, color: Colors.black87)),
+          Text(title, style: const TextStyle(fontSize: 13, color: Colors.black87)),
           Switch(
             value: value,
             onChanged: (_) {},

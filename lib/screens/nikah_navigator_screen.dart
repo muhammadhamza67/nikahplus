@@ -195,13 +195,40 @@ class NikahNavigatorScreen extends StatelessWidget {
                 _featureBox("AI Companion", Icons.smart_toy),
               ],
             ),
+
+            const SizedBox(height: 24),
+
+            // 🚀 Navigator Button (New)
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const NavigatorScreen()),
+                  );
+                },
+                child: const Text(
+                  "Go to Navigator Screen",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  // Reusable Widgets
+  // Reusable Widgets ...
 
   static Widget _filterChip(String text) {
     return Chip(
@@ -313,20 +340,41 @@ class NikahNavigatorScreen extends StatelessWidget {
 
   static Widget _featureBox(String title, IconData icon) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12))),
       elevation: 1,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, color: Colors.brown),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 12),
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// ➕ New Screen
+class NavigatorScreen extends StatelessWidget {
+  const NavigatorScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Navigator Screen"),
+      ),
+      body: const Center(
+        child: Text(
+          "Welcome to Navigator Screen!",
+          style: TextStyle(fontSize: 20),
         ),
       ),
     );
